@@ -1,7 +1,7 @@
-import Logo from "../../public/Logo.svg"
+import Logo from "../assets/Logo.png"
 const Footer = () => {
   return (
-   <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-4 bottom-0 fixed">
+   <footer className="footer sm:footer-horizontal text-black items-center p-4 bottom-0 fixed">
   <aside className="grid-flow-col items-center">
      <img
           src={Logo}
