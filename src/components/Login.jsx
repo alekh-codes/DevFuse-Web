@@ -1,52 +1,80 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
-  const [formData,setFormData] = useState({
-    emailId:"alekh@example.com",
-    password:"Thakur@1234"
-  })
+  const [formData, setFormData] = useState({
+    emailId: "alekh@example.com",
+    password: "Thakur@1234",
+  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleChange = (e) =>{
+  const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name] : e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  const handleSubmit = async () =>{
-    try{
-      const res = await axios.post("http://localhost:3000/login",formData)
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post(BASE_URL + "/login", formData, {
+        withCredentials: true,
+      });
       console.log(res.data);
       
-    }
-    catch(err){
+      dispatch(addUser(res.data.user)); 
+      navigate("/feed")
+    } catch (err) {
       console.log(err);
     }
-  }
-  return (    
-      <div className="flex justify-center items-center my-20 text-black">
-      
-      <div className="card  w-96 border-black/20 border-2 ">
+  };
+  return (
+    <div className="flex justify-center items-center my-20 text-black">
+      <div className="card  w-96 border-black/20 border-2 shadow-lg">
         <div className="card-body">
           <h2 className="card-title  text-3xl">Login</h2>
           <div>
             <fieldset className="fieldset my-4">
-            <label className="label" htmlFor="name">
-              Username
-            </label>
-            <input type="text"  name="emailId" value={formData.emailId} onChange={handleChange} className="bg-white border-2 p-2 rounded-lg"/>
-          </fieldset>
-          <fieldset className="fieldset my-4">
-            <label className="label" htmlFor="name">
-              Password
-            </label>
-            <input type="password" name="password" value={formData.password} onChange={handleChange} className="bg-white border-2 p-2 rounded-lg"/>
-            <a className="text-blue-700 underline" href="#">Forgot password?</a>
-          </fieldset>
+              <label className="label" htmlFor="name">
+                Username
+              </label>
+              <input
+                type="text"
+                name="emailId"
+                value={formData.emailId}
+                onChange={handleChange}
+                className="bg-white border-2 p-2 rounded-lg"
+              />
+            </fieldset>
+            <fieldset className="fieldset my-4">
+              <label className="label" htmlFor="name">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="bg-white border-2 p-2 rounded-lg"
+              />
+              <a className="text-blue-700 underline" href="#">
+                Forgot password?
+              </a>
+            </fieldset>
           </div>
           <div className="card-actions justify-center ">
-            <button type="button" onClick={handleSubmit} className="btn btn-primary rounded-2xl">Login</button>
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="btn btn-primary rounded-2xl"
+            >
+              Login
+            </button>
           </div>
         </div>
       </div>
