@@ -10,6 +10,7 @@ const Login = () => {
     emailId: "alekh@example.com",
     password: "Thakur@1234",
   });
+  const[errors,setErrors] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ const Login = () => {
       dispatch(addUser(res.data.user)); 
       navigate("/feed")
     } catch (err) {
-      console.log(err);
+       setErrors(err?.response?.data ||  "Something went wrong!")
     }
   };
   return (
@@ -62,12 +63,16 @@ const Login = () => {
                 onChange={handleChange}
                 className="bg-white border-2 p-2 rounded-lg"
               />
+              <p
+              className="text-red-600">{errors}</p>
               <a className="text-blue-700 underline" href="#">
                 Forgot password?
               </a>
             </fieldset>
+            
           </div>
           <div className="card-actions justify-center ">
+
             <button
               type="button"
               onClick={handleSubmit}

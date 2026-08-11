@@ -1,8 +1,22 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Logo from "../assets/Logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { removeUser } from "../utils/userSlice";
 const Nav = () => {
-    const user = useSelector((store) => store.user)
+    const user = useSelector((store) => store.user);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleLogout = async () =>{
+      try{
+        const user = await axios.post(BASE_URL + "/logout",{},{withCredentials:true});
+        dispatch(removeUser());
+        navigate("/login");
+      }catch(err){
+
+      }
+    }
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center">
@@ -42,7 +56,7 @@ const Nav = () => {
             <a>Settings</a>
           </li>
           <li>
-            <a>Logout</a>
+            <a onClick={handleLogout}>Logout</a>
           </li>
         </ul>
         </div>
