@@ -26,7 +26,6 @@ const Login = () => {
       const res = await axios.post(BASE_URL + "/login", formData, {
         withCredentials: true,
       });
-      console.log(res.data);
       
       dispatch(addUser(res.data.user)); 
       navigate("/feed")
