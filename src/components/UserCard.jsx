@@ -19,8 +19,8 @@ const UserCard = ({user}) =>{
     <p className="">{about}</p>
     </div>
     <div className="card-actions flex justify-evenly w-full mt-7">
-      <button title="ignore" className="btn bg-red-500/60 rounded-[50%] border-none">//</button>
-      <button title="interested" className="btn bg-blue-600  rounded-[50%] border-none">&gt;</button>
+      <button title="ignore" className="btn bg-red-500/60 rounded-xl border-none">//</button>
+      <button title="interested" className="btn bg-blue-600  rounded-xl border-none">&gt;</button>
     </div>
   </div>
 </div>

@@ -34,8 +34,8 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex justify-center items-center my-20 text-black">
-      <div className="card  w-96 border-black/20 border-2 shadow-lg">
+    <div className="flex justify-center items-center my-20  ">
+      <div className="card  w-96 border-black/20 border-2 shadow-lg bg-[#464343]">
         <div className="card-body">
           <h2 className="card-title  text-3xl">Login</h2>
           <div>
@@ -48,7 +48,7 @@ const Login = () => {
                 name="emailId"
                 value={formData.emailId}
                 onChange={handleChange}
-                className="bg-white border-2 p-2 rounded-lg"
+                className=" border-2 p-2 rounded-lg"
               />
             </fieldset>
             <fieldset className="fieldset my-4">
@@ -60,7 +60,7 @@ const Login = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="bg-white border-2 p-2 rounded-lg"
+                className=" border-2 p-2 rounded-lg"
               />
               <p
               className="text-red-600">{errors}</p>

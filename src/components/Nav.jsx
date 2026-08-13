@@ -21,13 +21,13 @@ const Nav = () => {
     <div className="flex justify-between items-center">
       <div className="flex items-center">
         <img src={Logo} width="64" alt="" />
-        <Link to="/" className="text-black text-3xl font-medium -mt-0.5">DevFuse</Link>
+        <Link to="/" className=" text-3xl font-medium -mt-0.5">DevFuse</Link>
       </div>
       {user && (
 
         <div className="dropdown dropdown-end mx-4 flex items-center">
         
-        <div className="text-black mx-4">
+        <div className=" mx-4">
             Welcome {user.firstName}!
         </div>    
         <div

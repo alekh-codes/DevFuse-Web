@@ -8,6 +8,7 @@ import appStore from "./utils/appStore";
 import Feed from "./components/Feed";
 import Profile from "./components/Profile";
 import Error from "./components/Error";
+import ProfileCard from "./components/ProfileCard";
 function App() {
   return (
     <>
@@ -18,7 +19,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/feed" element={<Feed/>} />
-              <Route path="/profile" element={<Profile/>} />
+              <Route path="/profile" element={<ProfileCard/>} />
               <Route path="/error" element={<Error/>} />
             </Route>
           </Routes>
