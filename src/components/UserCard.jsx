@@ -1,7 +1,7 @@
 const UserCard = ({user}) =>{
   const {firstName, lastName,about,imagUrl,age,gender} = user;
     return(
-        <div className="card bg-blue-200/56 w-96 shadow-lg ">
+        <div className="card bg-[#464343] w-96 shadow-lg ">
   <figure className="px-10 pt-10 relative group">
     <img
       src={imagUrl}
@@ -13,14 +13,14 @@ const UserCard = ({user}) =>{
     </div>
   </figure>
   
-  <div className="card-body">
+  <div className="card-body text-white">
     <div className="ml-5">      
     <h2 className="card-title">{lastName ? `${firstName} ${lastName}` : firstName}</h2>
     <p className="">{about}</p>
     </div>
     <div className="card-actions flex justify-evenly w-full mt-7">
-      <button title="ignore" className="btn bg-red-500/60 rounded-xl border-none">//</button>
-      <button title="interested" className="btn bg-blue-600  rounded-xl border-none">&gt;</button>
+      <button title="ignore" className="btn bg-red-500/60 rounded-xl border-none">Ignore</button>
+      <button title="interested" className="btn bg-blue-600  rounded-xl border-none">Interested</button>
     </div>
   </div>
 </div>

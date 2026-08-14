@@ -3,15 +3,14 @@ import ElectricBorder from "./ElectricBorder";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import Profile from "./Profile";
+import { Link } from "react-router-dom";
 
 const ProfileCard = () => {
   const user = useSelector((store) => store.user);
-  const [editForm, setEditForm] = useState(false);
+  
   const { firstName, lastName, age, gender, about, skills, imagUrl } =
     user || {};
-  const openEdit = () => {
-    setEditForm(true);
-  };
+  
   const fetchUser = async () => {
     if (user) return;
     try {
@@ -38,7 +37,6 @@ const ProfileCard = () => {
           chaos={0.12}
           thickness={2}
           style={{ borderRadius: 16 }}
-          className={`${editForm == true ? "hidden" : "block"}`}
         >
           <div className="p-6 flex flex-col justify-center items-center max-w-sm text-center">
             <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#7df9ff] shadow-[0_0_15px_rgba(125,249,255,0.3)] mb-4">
@@ -48,12 +46,11 @@ const ProfileCard = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute right-5 top-4 ">
-                <button>
-                  <RiEdit2Line
-                    onClick={() => openEdit()}
+                <Link to="/profile/edit">
+                <RiEdit2Line
                     className="text-white cursor-pointer"
                   />
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -86,13 +83,7 @@ const ProfileCard = () => {
             </div>
           </div>
         </ElectricBorder>
-        {editForm && (
-          <Profile
-            user={user}
-            editForm={editForm}
-            onCancel={() => setEditForm(false)}
-          />
-        )}
+        
       </div>
     )
   );
