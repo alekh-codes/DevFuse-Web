@@ -44,7 +44,7 @@ const Profile = () => {
   }
 
   const handleSubmit =async () =>{
-    const res = await axios.patch(BASE_URL + "/profile/edit",formData,{withCredentials:true});
+    const res = await axios.patch(BASE_URL + "/profile/edit",formData,{withCredentials:true});    
     dispatch(addUser(res.data.user));
     navigate("/profile");
     
@@ -90,7 +90,7 @@ const Profile = () => {
                   name="emailId"
                   value={emailId}
                   disabled
-                  className="border-2 p-2 rounded-lg bg-gray-200 text-black cursor-not-allowed"
+                  className="border-2 p-2 rounded-lg bg-gray-100/40 cursor-not-allowed"
                 />
               </fieldset>
               <fieldset className="fieldset my-1">
