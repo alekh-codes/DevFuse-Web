@@ -14,7 +14,6 @@ const Profile = () => {
   const [formData, setFormData] = useState({
     firstName: firstName ,
     lastName: lastName ,
-    emailId:emailId,
     about: about ,
     age:  age ,
     gender: gender ,
@@ -89,9 +88,9 @@ const Profile = () => {
                 <input
                   type="email"
                   name="emailId"
-                  value={formData.emailId}
-                  onChange={handleChange}
-                  className="border-2 p-2 rounded-lg"
+                  value={emailId}
+                  disabled
+                  className="border-2 p-2 rounded-lg bg-gray-200 text-black cursor-not-allowed"
                 />
               </fieldset>
               <fieldset className="fieldset my-1">
