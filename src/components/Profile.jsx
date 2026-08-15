@@ -22,6 +22,9 @@ const Profile = () => {
   });
   const [skillInput, setSkillInput] = useState("");
   const [error,setError] = useState(null);
+  const [toast,setToast] = useState(false);
+  const [loading,setLoading] = useState(false);
+
   const addSkill = () => {
     if (!skillInput.trim()) return;
 
@@ -73,19 +76,27 @@ const Profile = () => {
   };
 
   const handleSubmit = async () => {
-    setError("");
+    setError("");   
     try{
+      setLoading(true);
       const res = await axios.patch(BASE_URL + "/profile/edit", formData, {
       withCredentials: true,
     });
+     
     
     dispatch(addUser(res.data.user));
-    navigate("/profile");
+     setToast(true)
+     const i = setTimeout(()=>{
+      setToast(false);
+      navigate("/profile");
+     },2000)
     }catch(err){
       console.log("ERROR:", err);
   console.log("RESPONSE:", err.response?.data);
 
       setError(err?.response?.data?.message || "Something went wrong");
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -136,7 +147,7 @@ const Profile = () => {
                 <label className="label" htmlFor="name">
                   Gender:
                 </label>
-                  <select name="gender" value={gender} onChange={handleChange} className="bg-[#464343] p-2 border-2 rounded-lg" id="">
+                  <select name="gender" value={formData.gender} onChange={handleChange} className="bg-[#464343] p-2 border-2 rounded-lg" id="">
                     <option hidden defaultValue="select a gender" value="">Select a gender</option>
                       <option name="male" value="male">Male</option>
                       <option name= "female" value="female">Female</option>
@@ -182,7 +193,7 @@ const Profile = () => {
                   />
                   <button
                     onClick={addSkill}
-                    className="border-2 mx-2 p-2 rounded-xl"
+                    className="border-2 mx-2 p-2 rounded-xl cursor-pointer"
                   >
                     Add
                   </button>
@@ -198,7 +209,7 @@ const Profile = () => {
                       <button
                         type="button"
                         onClick={()=>deleteSkill(index)}
-                        className="absolute -top-2 -right-2 hidden group-hover:flex items-center justify-center w-5 h-5 rounded-full bg-zinc-700 text-gray-200"
+                        className="absolute -top-2 -right-2 cursor-pointer hidden group-hover:flex items-center justify-center w-5 h-5 rounded-full bg-zinc-700 text-gray-200"
                       >
                         <RiCloseLine size={14} />
                       </button>
@@ -221,11 +232,22 @@ const Profile = () => {
                 type="button"
                 className="btn btn-primary rounded-2xl"
               >
-                Save
+                {loading ?  <div>Saving....
+                    <span className="loading loading-spinner loading-xs"></span>
+                  </div>: <span>Save</span>}
               </button>
             </div>
           </div>
         </div>
+        {
+          toast && (
+            <div className="toast toast-top toast-end">
+          <div className="alert alert-info">
+            <span>Profile saved successfully!</span>
+          </div>
+        </div>
+          )
+        }
       </div>
     )
   );

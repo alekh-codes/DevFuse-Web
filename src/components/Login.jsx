@@ -85,7 +85,9 @@ const Login = () => {
               onClick={handleSubmit}
               className="btn btn-primary rounded-2xl"
             >
-              {loading ? "Logging in..." : "Login"}
+              {loading ? <div>
+                Logging in...<span className="loading loading-spinner loading-xs"></span>
+              </div>: "Login"}
             </button>
           </div>
         </div>
