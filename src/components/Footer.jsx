@@ -1,7 +1,7 @@
 import Logo from "../assets/Logo.png"
 const Footer = () => {
   return (
-   <footer className="footer sm:footer-horizontal  items-center p-4 bottom-0 fixed">
+   <footer className="footer sm:footer-horizontal items-center p-4">
   <aside className="grid-flow-col items-center">
      <img
           src={Logo}

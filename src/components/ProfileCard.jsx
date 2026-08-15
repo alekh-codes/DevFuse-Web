@@ -38,7 +38,7 @@ const ProfileCard = () => {
           thickness={2}
           style={{ borderRadius: 16 }}
         >
-          <div className="p-6 flex flex-col justify-center items-center max-w-sm text-center">
+          <div className="p-6 flex flex-col justify-center items-center w-100 text-center ">
             <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#7df9ff] shadow-[0_0_15px_rgba(125,249,255,0.3)] mb-4">
               <img
                 src={imagUrl}

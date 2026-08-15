@@ -5,55 +5,85 @@ import axios from "axios";
 import { BASE_URL } from "@/utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { addUser } from "@/utils/userSlice";
+import { RiCloseLine } from "react-icons/ri";
 
 const Profile = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { firstName, lastName, about, age, gender, emailId } = user || {};
+  const { firstName, lastName, about, age, gender, emailId, skills } =user || {};
   const [formData, setFormData] = useState({
-    firstName: firstName ,
-    lastName: lastName ,
-    about: about ,
-    age:  age ,
-    gender: gender ,
+    firstName: firstName,
+    lastName: lastName,
+    about: about,
+    age: age,
+    gender: gender,
+    skills: skills,
   });
+  const [skillInput, setSkillInput] = useState("");
 
-  const fetchUser = async () => {
-      if (user) return;
-      try {
-        const res = await axios.get(BASE_URL + "/profile", {
-          withCredentials: true,
-        });
-        dispatch(addUser(res.data));
-      } catch (err) {
-        if (err.status === 401) {
-          navigate("/login");
-        }
-      }
-    };
-    useEffect(() => {
-      fetchUser();
-    }, []);
+  const addSkill = () => {
+    if (!skillInput.trim()) return;
 
-  const handleChange = (e) =>{
     setFormData({
       ...formData,
-      [e.target.name] : e.target.value
+      skills: [...formData.skills, skillInput.trim()],
+    });
+    setSkillInput("");
+  };
+
+  const deleteSkill = (index) =>{
+    setFormData({
+      ...formData,
+      skills: formData.skills.filter((item,i) => i !== index)
     })
   }
+  const fetchUser = async () => {
+    if (user) return;
+    try {
+      const res = await axios.get(BASE_URL + "/profile", {
+        withCredentials: true,
+      });
+      dispatch(addUser(res.data));
+    } catch (err) {
+      if (err.status === 401) {
+        navigate("/login");
+      }
+    }
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
-  const handleSubmit =async () =>{
-    const res = await axios.patch(BASE_URL + "/profile/edit",formData,{withCredentials:true});    
+  useEffect(() => {
+    setFormData({
+      firstName: firstName || "",
+      lastName: lastName || "",
+      gender: gender || "",
+      age: age || "",
+      about: about || "",
+      skills: skills || [],
+    });
+  }, [user]);
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    const res = await axios.patch(BASE_URL + "/profile/edit", formData, {
+      withCredentials: true,
+    });
     dispatch(addUser(res.data.user));
     navigate("/profile");
-    
-  }
+  };
 
   return (
     user && (
       <div className={`flex justify-center items-center   rounded-2xl `}>
-        <div className="card  w-96 border-black/20 bg-[#464343] border-2 shadow-lg">
+        <div className="card w-96 border-black/20 bg-[#464343] border-2 shadow-lg">
           <div className="card-body">
             <h2 className="card-title  text-3xl">Edit details</h2>
             <div>
@@ -101,7 +131,7 @@ const Profile = () => {
                   type="text"
                   name="gender"
                   value={formData.gender}
-                   onChange={handleChange}
+                  onChange={handleChange}
                   className=" border-2 p-2 rounded-lg"
                 />
               </fieldset>
@@ -113,7 +143,7 @@ const Profile = () => {
                   type="text"
                   name="age"
                   value={formData.age}
-                   onChange={handleChange}
+                  onChange={handleChange}
                   className=" border-2 p-2 rounded-lg"
                 />
               </fieldset>
@@ -125,17 +155,62 @@ const Profile = () => {
                   type="text"
                   name="about"
                   value={formData.about}
-                   onChange={handleChange}
+                  onChange={handleChange}
                   className=" border-2 p-2 rounded-lg"
                 />
               </fieldset>
+              <fieldset className="fieldset my-1">
+                <label className="label" htmlFor="name">
+                  Skills:
+                </label>
+                <div className="w-fit">
+                  <input
+                    type="text"
+                    name="skills"
+                    value={skillInput}
+                    onChange={(e) => setSkillInput(e.target.value)}
+                    className=" border-2 p-2 rounded-lg"
+                  />
+                  <button
+                    onClick={addSkill}
+                    className="border-2 mx-2 p-2 rounded-xl"
+                  >
+                    Add
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {formData.skills.map((item, index) => (
+                    <div
+                      key={index}
+                      className="group relative p-2 pr-3 rounded-2xl bg-zinc-800/80 text-[#7df9ff] border border-[#7df9ff]/30"
+                    >
+                      <span className="text-xs shadow-sm">{item}</span>
+
+                      <button
+                        type="button"
+                        onClick={()=>deleteSkill(index)}
+                        className="absolute -top-2 -right-2 hidden group-hover:flex items-center justify-center w-5 h-5 rounded-full bg-zinc-700 text-gray-200"
+                      >
+                        <RiCloseLine size={14} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </fieldset>
             </div>
             <div className="card-actions justify-center ">
-              <Link to="/profile"
-              type="button" className="btn bg-white text-black rounded-2xl">
+              <Link
+                to="/profile"
+                type="button"
+                className="btn bg-white text-black rounded-2xl"
+              >
                 Cancel
               </Link>
-              <button onClick={handleSubmit} type="button" className="btn btn-primary rounded-2xl">
+              <button
+                onClick={handleSubmit}
+                type="button"
+                className="btn btn-primary rounded-2xl"
+              >
                 Save
               </button>
             </div>
