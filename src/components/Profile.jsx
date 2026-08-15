@@ -21,7 +21,7 @@ const Profile = () => {
     skills: skills,
   });
   const [skillInput, setSkillInput] = useState("");
-
+  const [error,setError] = useState(null);
   const addSkill = () => {
     if (!skillInput.trim()) return;
 
@@ -73,11 +73,20 @@ const Profile = () => {
   };
 
   const handleSubmit = async () => {
-    const res = await axios.patch(BASE_URL + "/profile/edit", formData, {
+    setError("");
+    try{
+      const res = await axios.patch(BASE_URL + "/profile/edit", formData, {
       withCredentials: true,
     });
+    
     dispatch(addUser(res.data.user));
     navigate("/profile");
+    }catch(err){
+      console.log("ERROR:", err);
+  console.log("RESPONSE:", err.response?.data);
+
+      setError(err?.response?.data?.message || "Something went wrong");
+    }
   };
 
   return (
@@ -127,13 +136,13 @@ const Profile = () => {
                 <label className="label" htmlFor="name">
                   Gender:
                 </label>
-                <input
-                  type="text"
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleChange}
-                  className=" border-2 p-2 rounded-lg"
-                />
+                  <select name="gender" value={gender} onChange={handleChange} className="bg-[#464343] p-2 border-2 rounded-lg" id="">
+                    <option hidden defaultValue="select a gender" value="">Select a gender</option>
+                      <option name="male" value="male">Male</option>
+                      <option name= "female" value="female">Female</option>
+                      <option name="others" value="others">Others</option>
+                    
+                  </select>
               </fieldset>
               <fieldset className="fieldset my-1">
                 <label className="label" htmlFor="name">
@@ -197,6 +206,7 @@ const Profile = () => {
                   ))}
                 </div>
               </fieldset>
+              <p className="text-red-500 text-sm">{error}</p>
             </div>
             <div className="card-actions justify-center ">
               <Link
