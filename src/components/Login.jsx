@@ -11,8 +11,10 @@ const Login = () => {
     password: "Thakur@1234",
   });
   const[errors,setErrors] = useState("");
+  const[loading,setLoading]= useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     setFormData({
@@ -23,14 +25,19 @@ const Login = () => {
 
   const handleSubmit = async () => {
     try {
+      setLoading(true);
       const res = await axios.post(BASE_URL + "/login", formData, {
         withCredentials: true,
       });
       
       dispatch(addUser(res.data.user)); 
       navigate("/feed")
+      
     } catch (err) {
+      
        setErrors(err?.response?.data ||  "Something went wrong!")
+    }finally{
+      setLoading(false);
     }
   };
   return (
@@ -77,7 +84,7 @@ const Login = () => {
               onClick={handleSubmit}
               className="btn btn-primary rounded-2xl"
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
           </div>
         </div>
