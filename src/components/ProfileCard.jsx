@@ -85,7 +85,7 @@ const ProfileCard = () => {
         </ElectricBorder>
 
         <div className="mt-20 ">
-          <Link to={"/feed"} className="bg-white text-black p-2 rounded-xl flex items-center gap-2">
+          <Link to={"/"} className="bg-white text-black p-2 rounded-xl flex items-center gap-2">
             <RiArrowLeftLine/> Go to feed
           </Link>
         </div>

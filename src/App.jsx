@@ -9,6 +9,7 @@ import Feed from "./components/Feed";
 import Profile from "./components/Profile";
 import Error from "./components/Error";
 import ProfileCard from "./components/ProfileCard";
+import Connections from "./components/Connections";
 function App() {
   return (
     <>
@@ -18,10 +19,12 @@ function App() {
             <Route path="/" element={<Body />}>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/feed" element={<Feed/>} />
+              <Route path="/" element={<Feed/>} />
               <Route path="/profile" element={<ProfileCard/>} />
               <Route path="/profile/edit" element={<Profile/>} />
               <Route path="/error" element={<Error/>} />
+              <Route path="/connections" element={<Connections/>} />
+
             </Route>
           </Routes>
         </BrowserRouter>

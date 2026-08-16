@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
+  const user = useSelector(store => store.user);
   const [formData, setFormData] = useState({
     emailId: "alekh@example.com",
     password: "Thakur@1234",
@@ -31,7 +32,7 @@ const Login = () => {
       });
       
       dispatch(addUser(res.data.user)); 
-      navigate("/feed")
+      navigate("/")
       
     } catch (err) {
        console.log(err?.response?.data);
@@ -41,6 +42,12 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+  useEffect(()=>{
+    if(user){
+      navigate("/")
+    }
+  },[user,navigate])
   return (
     <div className="flex justify-center items-center my-20  ">
       <div className="card  w-96 border-black/20 border-2 shadow-lg bg-[#464343]">
