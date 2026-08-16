@@ -1,4 +1,4 @@
-import { RiEdit2Line } from "react-icons/ri";
+import { RiArrowLeftLine, RiEdit2Line } from "react-icons/ri";
 import ElectricBorder from "./ElectricBorder";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
@@ -30,7 +30,7 @@ const ProfileCard = () => {
 
   return (
     user && (
-      <div className={`flex justify-center text-white p-4 `}>
+      <div className={`flex justify-center text-white p-4 flex-col items-center `}>
         <ElectricBorder
           color="#7df9ff"
           speed={1}
@@ -83,6 +83,12 @@ const ProfileCard = () => {
             </div>
           </div>
         </ElectricBorder>
+
+        <div className="mt-20 ">
+          <Link to={"/feed"} className="bg-white text-black p-2 rounded-xl flex items-center gap-2">
+            <RiArrowLeftLine/> Go to feed
+          </Link>
+        </div>
         
       </div>
     )

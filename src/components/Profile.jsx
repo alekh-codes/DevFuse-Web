@@ -241,7 +241,7 @@ const Profile = () => {
         </div>
         {
           toast && (
-            <div className="toast toast-top toast-end">
+            <div className="toast toast-top toast-end mt-10">
           <div className="alert alert-info">
             <span>Profile saved successfully!</span>
           </div>
