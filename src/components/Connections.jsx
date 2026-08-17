@@ -27,7 +27,7 @@ const Connections = () => {
     if(connections.length ===0) return <h1 className='text-xl font-bold text-white'>No connections found</h1>
   return (
     <div className='flex justify-center'>
-      <div className='shadow-xl bg-[#464343] rounded-xl p-2'>
+      <div className='shadow-xl bg-[#464343] rounded-xl p-2 m-20'>
         <h1 className='text-xl font-medium'>Connections</h1>
         <hr className='mt-2 opacity-40' />
         {
