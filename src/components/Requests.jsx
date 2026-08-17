@@ -2,7 +2,7 @@ import { BASE_URL } from "@/utils/constants";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addRequests, removeRequest } from "@/utils/requestSlice";
 import { RiCheckLine, RiCloseLine } from "react-icons/ri";
 
@@ -10,6 +10,9 @@ const Requests = () => {
   const requests = useSelector((store) => store.requests);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [toastMessage,setToastMessage] = useState("");
+  const [showToast,setShowToast] = useState(false);
+  const [bgColor,setBgColor] = useState("");
   const fetchRequests = async () => {
     try {
       const res = await axios.get(BASE_URL + "/requests/received", {
@@ -35,6 +38,22 @@ const Requests = () => {
         {},
         { withCredentials: true },
       );
+      dispatch(removeRequest(requestId));
+      if(status === "accepted"){
+        setToastMessage("Request accepted!");
+          setShowToast(true);
+        setTimeout(() => {
+          setShowToast(false)
+        }, 2000);
+      }
+      if(status === "rejected"){
+        setToastMessage("Request rejected!");
+        setShowToast(true);
+          setBgColor("bg-red-500")
+        setTimeout(() => {
+          setShowToast(false)
+        }, 2000);
+      }
     } catch (err) {
       if (err.status === 400) {
         console.log(err.message);
@@ -43,16 +62,20 @@ const Requests = () => {
   };
 
   const requestRemove = (id) =>{
-    dispatch(removeRequest(id));
+    setTimeout(() => {
+      dispatch(removeRequest(id));
+    }, 2000);
   }
 
   if (!requests) return;
-  if (requests.length === 0)
-    return <h1 className="text-xl font-bold text-white">No requests found</h1>;
+
+
 
   return (
     <div className="flex justify-center">
-      <div className="shadow-xl bg-[#464343] rounded-xl p-2 m-20">
+      {
+        requests.length === 0 ? (<h1 className="text-xl mt-20 font-bold text-white">No requests found!</h1>) : (
+           <div className="shadow-xl bg-[#464343] rounded-xl p-2 m-20">
         <h1 className="text-xl font-medium">Requests</h1>
         <hr className="mt-2 opacity-40" />
         {requests.map((request) => {
@@ -76,7 +99,7 @@ const Requests = () => {
                   <p className="font-bold text-xl">
                     {lastName ? firstName + " " + lastName : firstName}
                   </p>
-                  <p>{about}</p>
+                  <p className="text-gray-300/60">{about}</p>
                 </div>
               </div>
               <div className="mx-4 flex ">
@@ -103,6 +126,20 @@ const Requests = () => {
           );
         })}
       </div>
+        )
+      }
+      {
+            showToast && (
+                 <div className="toast toast-top  toast-end mt-10">
+          <div className={`alert alert-info border-none ${bgColor}`}>
+            <span>{toastMessage}</span>
+          </div>
+        </div>
+             )
+        } 
+      
+        
+          
     </div>
   );
 };
