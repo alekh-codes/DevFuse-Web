@@ -8,6 +8,6 @@ const requestSlice = createSlice({
     },
 })
 
-const {addRequests} = requestSlice.actions;
+export const {addRequests} = requestSlice.actions;
 
 export default requestSlice.reducer;

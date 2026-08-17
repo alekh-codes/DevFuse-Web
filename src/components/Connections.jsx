@@ -31,17 +31,20 @@ const Connections = () => {
         <h1 className='text-xl font-medium'>Connections</h1>
         <hr className='mt-2 opacity-40' />
         {
-          connections.map(connection =>(
-            <div key={connection._id} className='flex m-5 border-2 shadow-md border-gray-400/20 p-2 rounded-xl'>
+          connections.map(connection =>{ 
+            const {firstName, lastName,_id,about,imagUrl} = connection;
+            return (
+            
+            <div key={_id} className='flex m-5 border-2 shadow-md border-gray-400/20 p-2 rounded-xl'>
               <div className=''>
-                <img src={connection.imagUrl} className='h-20 w-20 rounded-full' alt="" />
+                <img src={imagUrl} className='h-20 w-20 rounded-full' alt="" />
               </div>
               <div className='m-3'>
-                <p>{connection.lastName ? (connection.firstName + ' ' + connection.lastName) : connection.lastName}</p>
-                <p>{connection.about}</p>
+                <p>{lastName ? (firstName + ' ' + lastName) : firstName}</p>
+                <p>{about}</p>
               </div>
             </div>
-          ))
+          )})
         }
       </div>
     </div>

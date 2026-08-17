@@ -10,6 +10,7 @@ import Profile from "./components/Profile";
 import Error from "./components/Error";
 import ProfileCard from "./components/ProfileCard";
 import Connections from "./components/Connections";
+import Requests from "./components/Requests";
 function App() {
   return (
     <>
@@ -24,6 +25,7 @@ function App() {
               <Route path="/profile/edit" element={<Profile/>} />
               <Route path="/error" element={<Error/>} />
               <Route path="/connections" element={<Connections/>} />
+              <Route path="/requests/received" element={<Requests/>} />
 
             </Route>
           </Routes>

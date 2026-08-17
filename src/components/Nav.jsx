@@ -56,8 +56,12 @@ const Nav = () => {
             <Link to="/connections">Connections</Link>
           </li>
           <li>
-            <a onClick={handleLogout}>Logout</a>
+            <Link to="/requests/received">Pending requests</Link>
           </li>
+          <li>
+            <button onClick={handleLogout}>Logout</button>
+          </li>
+          
         </ul>
         </div>
       
