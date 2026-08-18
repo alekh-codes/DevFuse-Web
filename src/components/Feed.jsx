@@ -6,6 +6,7 @@ import { addfeed } from '../utils/feedSlice';
 import { useNavigate } from 'react-router-dom';
 import UserCard from './UserCard';
 import { RiCheckLine } from 'react-icons/ri';
+import GradientText from './GradientText';
 
 const Feed = () => {
   const feed = useSelector(store => store.feed);
@@ -30,7 +31,15 @@ const Feed = () => {
   if(!feed) return null;
   if(feed.length === 0) return(
     <div className='flex flex-col justify-center items-center '>
-      <h1 className='font-bold text-2xl mt-20'>All caught up! Check back later for new profiles</h1>
+      <GradientText
+      colors={["#75e9ee","#56ee0e","#2b52f0"]}
+      animationSpeed={4}
+      showBorder={false}
+      className="custom-class"
+      >
+        <h1 className='font-bold text-2xl mt-20'>All caught up! Check back later for new profiles</h1>
+      </GradientText>
+     
       <RiCheckLine className='text-6xl mt-12 bg-green-600 p-2 rounded-full'/>
     </div>
   )
