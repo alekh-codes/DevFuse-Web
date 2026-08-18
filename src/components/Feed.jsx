@@ -5,6 +5,7 @@ import { BASE_URL } from '../utils/constants';
 import { addfeed } from '../utils/feedSlice';
 import { useNavigate } from 'react-router-dom';
 import UserCard from './UserCard';
+import { RiCheckLine } from 'react-icons/ri';
 
 const Feed = () => {
   const feed = useSelector(store => store.feed);
@@ -15,7 +16,7 @@ const Feed = () => {
     if(feed) return;
     try{
       const res = await axios.get(BASE_URL + "/feed",{withCredentials:true});
-    dispatch(addfeed(res.data))
+    dispatch(addfeed(res?.data?.data))
     }catch(err){
       navigate("/error");
     }
@@ -26,6 +27,13 @@ const Feed = () => {
     getFeed();
   },[])
 
+  if(!feed) return null;
+  if(feed.length === 0) return(
+    <div className='flex flex-col justify-center items-center '>
+      <h1 className='font-bold text-2xl mt-20'>All caught up! Check back later for new profiles</h1>
+      <RiCheckLine className='text-6xl mt-12 bg-green-600 p-2 rounded-full'/>
+    </div>
+  )
   return feed && (
     <div className='text-black text-2xl flex justify-center'>
       <UserCard user={feed[0]}/>

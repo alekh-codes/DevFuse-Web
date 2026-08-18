@@ -1,8 +1,7 @@
-import { RiArrowLeftLine, RiEdit2Line } from "react-icons/ri";
+import {  RiEdit2Line } from "react-icons/ri";
 import ElectricBorder from "./ElectricBorder";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import Profile from "./Profile";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const ProfileCard = () => {
@@ -84,11 +83,7 @@ const ProfileCard = () => {
           </div>
         </ElectricBorder>
 
-        <div className="mt-20 ">
-          <Link to={"/"} className="bg-white text-black p-2 rounded-xl flex items-center gap-2">
-            <RiArrowLeftLine/> Go to feed
-          </Link>
-        </div>
+       
         
       </div>
     )

@@ -1,5 +1,18 @@
+import { BASE_URL } from "@/utils/constants";
+import { removeUserFromfeed } from "@/utils/feedSlice";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+
 const UserCard = ({user}) =>{
-  const {firstName, lastName,about,imagUrl,age,gender,skills} = user;
+  
+  const { _id, firstName, lastName,about,imagUrl,age,gender,skills} = user || {};
+
+  const dispatch = useDispatch();
+  const sendRequest = async (status,userId) =>{    
+    
+    const res = await axios.post(BASE_URL + "/request/send/" + status +  "/" + userId, {} , {withCredentials:true});
+    dispatch(removeUserFromfeed(userId));
+  }
     return(
         <div className="p-6 flex flex-col justify-center items-center w-100 bg-[#464343] rounded-xl shadow-xl text-center ">
             <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#7df9ff] shadow-[0_0_15px_rgba(125,249,255,0.3)] mb-4">
@@ -39,8 +52,12 @@ const UserCard = ({user}) =>{
               </div>
             </div>
             <div className="text-sm mt-7 flex gap-5 ">
-              <button className="cursor-pointer bg-red-500 p-2 text-white border-white border-2 rounded-xl">Ignore</button>
-              <button className="cursor-pointer bg-blue-500 p-2 text-white border-white border-2 rounded-xl">Interested</button>
+              <button 
+              onClick={()=> sendRequest("ignored",_id)}
+              className="cursor-pointer bg-red-500 p-2 text-white border-white border-2 rounded-xl">Ignore</button>
+              <button
+              onClick={()=> sendRequest("interested", _id)}              
+              className="cursor-pointer bg-blue-500 p-2 text-white border-white border-2 rounded-xl">Interested</button>
 
             </div>
           </div>
