@@ -18,7 +18,6 @@ const Requests = () => {
       const res = await axios.get(BASE_URL + "/requests/received", {
         withCredentials: true,
       });
-      console.log(res.data.data);
       dispatch(addRequests(res?.data?.data));
     } catch (err) {
       if (err.status === 401) {
@@ -56,7 +55,7 @@ const Requests = () => {
       }
     } catch (err) {
       if (err.status === 400) {
-        console.log(err.message);
+        navigate("/error")
       }
     }
   };

@@ -28,7 +28,7 @@ const Nav = () => {
         <div className="dropdown dropdown-end mx-4 flex items-center">
         
         <div className=" mx-4">
-            Welcome {user.firstName}!
+            Hello {user.firstName}!
         </div>    
         <div
           tabIndex={0}

@@ -91,8 +91,6 @@ const Profile = () => {
       navigate("/profile");
      },2000)
     }catch(err){
-      console.log("ERROR:", err);
-  console.log("RESPONSE:", err.response?.data);
 
       setError(err?.response?.data?.message || "Something went wrong");
     }finally{
