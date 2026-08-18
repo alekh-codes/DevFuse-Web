@@ -26,7 +26,7 @@ const Feed = () => {
 
   useEffect(()=>{
     getFeed();
-  },[])
+  },[feed])
 
   if(!feed) return null;
   if(feed.length === 0) return(

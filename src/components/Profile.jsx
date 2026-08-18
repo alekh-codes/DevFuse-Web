@@ -13,12 +13,12 @@ const Profile = () => {
   const navigate = useNavigate();
   const { firstName, lastName, about, age, gender, emailId, skills } =user || {};
   const [formData, setFormData] = useState({
-    firstName: firstName,
-    lastName: lastName,
-    about: about,
-    age: age,
-    gender: gender,
-    skills: skills,
+    firstName: firstName || "",
+    lastName: lastName || "",
+    about: about || "",
+    age: age || "",
+    gender: gender || "",
+    skills: skills || "",
   });
   const [skillInput, setSkillInput] = useState("");
   const [error,setError] = useState(null);
