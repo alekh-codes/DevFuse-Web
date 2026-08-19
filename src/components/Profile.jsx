@@ -11,14 +11,15 @@ const Profile = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { firstName, lastName, about, age, gender, emailId, skills } =user || {};
+  const { firstName, lastName, about, age, gender, emailId, skills , imagUrl} =user || {};
   const [formData, setFormData] = useState({
     firstName: firstName || "",
     lastName: lastName || "",
     about: about || "",
     age: age || "",
     gender: gender || "",
-    skills: skills || "",
+    skills: skills || [],
+    imagUrl : imagUrl || ""
   });
   const [skillInput, setSkillInput] = useState("");
   const [error,setError] = useState(null);
@@ -26,20 +27,21 @@ const Profile = () => {
   const [loading,setLoading] = useState(false);
 
   const addSkill = () => {
-    if (!skillInput.trim()) return;
+   if (!skillInput.trim()) return;
 
-    setFormData({
-      ...formData,
-      skills: [...formData.skills, skillInput.trim()],
-    });
-    setSkillInput("");
+  setFormData((prev) => ({
+    ...prev,
+    skills: [...(prev.skills || []), skillInput.trim()],
+  }));
+
+  setSkillInput("");
   };
 
   const deleteSkill = (index) =>{
-    setFormData({
-      ...formData,
-      skills: formData.skills.filter((item,i) => i !== index)
-    })
+    setFormData((prev) => ({
+    ...prev,
+    skills: (prev.skills || []).filter((_, i) => i !== index),
+  }));
   }
   const fetchUser = async () => {
     if (user) return;
@@ -66,37 +68,76 @@ const Profile = () => {
       age: age || "",
       about: about || "",
       skills: skills || [],
+      imagUrl: imagUrl || ""
     });
   }, [user]);
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const { name, value, type, files } = e.target;
+
+  if (type === "file") {
+    const file = files[0];
+
+    if (!file) return;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: file,
+    }));
+  } else {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+};
 
   const handleSubmit = async () => {
-    setError("");   
-    try{
-      setLoading(true);
-      const res = await axios.patch(BASE_URL + "/profile/edit", formData, {
-      withCredentials: true,
+  setError("");
+
+  try {
+    setLoading(true);
+
+    const data = new FormData();
+
+    data.append("firstName", formData.firstName);
+    data.append("lastName", formData.lastName);
+    data.append("about", formData.about);
+    data.append("age", formData.age);
+    data.append("gender", formData.gender);
+
+    formData.skills.forEach((skill) => {
+      data.append("skills", skill);
     });
-     
-    
+
+    if (formData.imagUrl instanceof File) {
+      data.append("imagUrl", formData.imagUrl);
+    }
+
+    const res = await axios.patch(
+      BASE_URL + "/profile/edit",
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+
     dispatch(addUser(res.data.user));
-     setToast(true)
-     const i = setTimeout(()=>{
+
+    setToast(true);
+
+    setTimeout(() => {
       setToast(false);
       navigate("/profile");
-     },2000)
-    }catch(err){
+    }, 2000);
 
-      setError(err?.response?.data?.message || "Something went wrong");
-    }finally{
-      setLoading(false);
-    }
-  };
+  } catch (err) {
+    setError(
+      err?.response?.data?.message || "Something went wrong"
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     user && (
@@ -105,6 +146,18 @@ const Profile = () => {
           <div className="card-body">
             <h2 className="card-title  text-3xl">Edit details</h2>
             <div className="grid grid-cols-3 place-content-between gap-2">
+              <fieldset className="fieldset ">
+                <label className="label" htmlFor="name">
+                  Upload Prfoile Picture:
+                </label>
+                <input
+                  type="file"
+                  name="imagUrl"
+                  onChange={handleChange}
+                  accept="image/*"
+                  className="border-2 p-2 rounded-lg"
+                />
+              </fieldset>
               <fieldset className="fieldset ">
                 <label className="label" htmlFor="name">
                   FirstName:

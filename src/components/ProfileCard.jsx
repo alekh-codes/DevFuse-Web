@@ -3,6 +3,7 @@ import ElectricBorder from "./ElectricBorder";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "@/utils/constants";
 
 const ProfileCard = () => {
   const user = useSelector((store) => store.user);
@@ -40,7 +41,7 @@ const ProfileCard = () => {
           <div className="p-6 flex flex-col justify-center items-center w-100 text-center ">
             <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#7df9ff] shadow-[0_0_15px_rgba(125,249,255,0.3)] mb-4">
               <img
-                src={imagUrl}
+                src={`${BASE_URL}${imagUrl}`}
                 alt={firstName}
                 className="w-full h-full object-cover"
               />

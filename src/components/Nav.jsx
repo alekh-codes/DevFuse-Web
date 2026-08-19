@@ -6,6 +6,7 @@ import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 const Nav = () => {
     const user = useSelector((store) => store.user);
+    const {firstName,imagUrl} = user || {};
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleLogout = async () =>{
@@ -18,7 +19,7 @@ const Nav = () => {
       }
     }
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center mt-2">
       <div className="flex items-center">
         <img src={Logo} width="64" alt="" />
         <Link to="/" className=" text-3xl font-medium -mt-0.5">DevFuse</Link>
@@ -28,7 +29,7 @@ const Nav = () => {
         <div className="dropdown dropdown-end mx-4 flex items-center">
         
         <div className=" mx-4">
-            Hello {user.firstName}!
+            Hello {firstName}!
         </div>    
         <div
           tabIndex={0}
@@ -38,8 +39,8 @@ const Nav = () => {
             
           <div className="w-10 rounded-full">
             <img
-                src={user.imagUrl}
-                 alt={user.firstName}
+                src={`${BASE_URL}${imagUrl}`}
+                 alt={firstName}
             />
           </div>
         </div>

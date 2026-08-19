@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constants";
-import { addfeed, addMoreFeed } from "../utils/feedSlice";
+import { addfeed } from "../utils/feedSlice";
 import { useNavigate } from "react-router-dom";
 import UserCard from "./UserCard";
 import { RiCheckLine } from "react-icons/ri";
@@ -11,61 +11,33 @@ import GradientText from "./GradientText";
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
 
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
-  const getFeed = async (pageNumber) => {
-    if (loading || !hasMore) return;
-
+  const getFeed = async () => {
     try {
-      setLoading(true);
+      const res = await axios.get(`${BASE_URL}/feed`, {
+        withCredentials: true,
+      });
 
-      const res = await axios.get(
-        `${BASE_URL}/feed?page=${pageNumber}&limit=10`,
-        {
-          withCredentials: true,
-        }
-      );
-
-      const newUsers = res?.data?.data || [];
-
-      setHasMore(res?.data?.hasMore);
-
-      if (pageNumber === 1) {
-        dispatch(addfeed(newUsers));
-      } else {
-        dispatch(addMoreFeed(newUsers));
-      }
-
+      dispatch(addfeed(res?.data?.data || []));
     } catch (err) {
       navigate("/error");
     } finally {
       setLoading(false);
     }
   };
+
   useEffect(() => {
-    getFeed(1);
+    getFeed();
   }, []);
 
-  useEffect(() => {
-    if (feed && feed.length === 0 && !loading && hasMore) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  }, [feed, loading, hasMore]);
+  if (loading || !feed) {
+    return null;
+  }
 
-  useEffect(() => {
-    if (page > 1) {
-      getFeed(page);
-    }
-  }, [page]);
-
-  if (!feed) return null;
-
-  if (feed.length === 0 && !loading) {
+  if (feed.length === 0) {
     return (
       <div className="flex flex-col justify-center items-center">
         <GradientText
@@ -80,14 +52,6 @@ const Feed = () => {
         </GradientText>
 
         <RiCheckLine className="text-6xl mt-12 bg-green-600 p-2 rounded-full" />
-      </div>
-    );
-  }
-
-  if (loading && feed.length === 0) {
-    return (
-      <div className="flex justify-center items-center mt-20">
-        <h1 className="text-xl">Loading...</h1>
       </div>
     );
   }
