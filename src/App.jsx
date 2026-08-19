@@ -12,9 +12,12 @@ import ProfileCard from "./components/ProfileCard";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import EditPassword from "./components/EditPassword";
+import { StarsBackground } from "./components/stars";
 function App() {
   return (
-    <>
+    <StarsBackground>
+
+      <>
       <Provider store={appStore}>
         <BrowserRouter basename="/">
           <Routes>
@@ -34,6 +37,7 @@ function App() {
         </BrowserRouter>
       </Provider>
     </>
+    </StarsBackground>
   );
 }
 

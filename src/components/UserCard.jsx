@@ -14,7 +14,7 @@ const UserCard = ({user}) =>{
     dispatch(removeUserFromfeed(userId));
   }
     return(
-        <div className="p-6 flex flex-col justify-center items-center w-100 bg-[#464343] rounded-xl shadow-xl text-center ">
+        <div className="p-6 flex flex-col justify-center items-center w-100  rounded-xl shadow-[0_0_22px_22px_rgba(0,0,0,0.3)] text-center ">
             <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#7df9ff] shadow-[0_0_15px_rgba(125,249,255,0.3)] mb-4">
               <img
                 src={imagUrl}

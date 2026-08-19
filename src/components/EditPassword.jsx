@@ -11,6 +11,7 @@ const EditPassword = () =>{
         newPassword:""
     })
     const[errors,setErrors] = useState("");
+    const[showToast,setShowtoast] = useState(false);
     const[loading,setLoading] = useState(false);
     const navigate = useNavigate();
     const handleChange = (e) =>{
@@ -25,19 +26,41 @@ const EditPassword = () =>{
         setLoading(true);
         try{
         const res = await axios.patch(BASE_URL + "/edit/password", passData);
-        navigate("/login")
+        setShowtoast(true);
+        setTimeout(() => {
+            setShowtoast(false);
+            navigate("/login")
+        }, 2000);
         
         }catch(err){            
             setErrors(err?.response?.data || "Something went wrong");
+            setShowtoast(true)
+            setTimeout(() => {
+                setShowtoast(false);
+            }, 2000);
         }
         finally{
             setLoading(false);
+            
         }
         
     }
     return(
         <div className="flex justify-center items-center my-12  ">
-      <div className="card  w-96 border-black/20 border-2 shadow-lg bg-[#464343]">
+        {
+            showToast && (
+                <div className="toast toast-top toast-center">
+                    <div className={`${errors ? "bg-red-400" : "bg-green-500"} alert alert-success`}>
+                    {
+                    errors ? 
+                    <span>{errors}</span>:
+                    <span>Password updated successfully!</span>
+                    }
+                    </div>
+                </div>
+            )
+        }
+      <div className="card  w-96 border-black/20 border-2 shadow-[0_0_22px_22px_rgba(0,0,0,0.3)]">
         <div className="card-body">
           <h2 className="card-title  text-3xl">Edit password</h2>
           <div>
@@ -78,11 +101,7 @@ const EditPassword = () =>{
                 onChange={handleChange}
                 className=" border-2 p-2 rounded-lg"
               />
-              {
-                errors &&(
-                    <p className="text-red-500">{errors}</p>
-                )
-              }
+              
             </fieldset>
             <div className="card-actions justify-center ">
                 <button

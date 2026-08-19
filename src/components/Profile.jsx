@@ -101,10 +101,10 @@ const Profile = () => {
   return (
     user && (
       <div className={`flex justify-center items-center   rounded-2xl `}>
-        <div className="card w-96 border-black/20 bg-[#464343] border-2 shadow-lg">
+        <div className="card  border-black/20 shadow-[0_0_22px_22px_rgba(0,0,0,0.3)]">
           <div className="card-body">
             <h2 className="card-title  text-3xl">Edit details</h2>
-            <div>
+            <div className="grid grid-cols-3 place-content-between gap-2">
               <fieldset className="fieldset ">
                 <label className="label" htmlFor="name">
                   FirstName:
@@ -181,7 +181,7 @@ const Profile = () => {
                 <label className="label" htmlFor="name">
                   Skills:
                 </label>
-                <div className="w-fit">
+                <div className="">
                   <input
                     type="text"
                     name="skills"
@@ -196,7 +196,7 @@ const Profile = () => {
                     Add
                   </button>
                 </div>
-                <div className="flex flex-wrap gap-2 mt-2">
+                <div className="grid grid-cols-3 gap-2 mt-2">
                   {formData.skills.map((item, index) => (
                     <div
                       key={index}

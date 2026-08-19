@@ -56,7 +56,7 @@ const Login = () => {
   },[user,navigate])
   return (
     <div className="flex justify-center items-center my-12  ">
-      <div className="card  w-96 border-black/20 border-2 shadow-lg bg-[#464343]">
+      <div className="card  w-96 border-black/20 border-2 shadow-[0_0_22px_22px_rgba(0,0,0,0.3)]">
         <div className="card-body">
           <h2 className="card-title  text-3xl">{isLoginForm ? "Login" : "Sign up"}</h2>
           <div>

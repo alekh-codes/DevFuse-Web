@@ -74,7 +74,7 @@ const Requests = () => {
     <div className="flex justify-center">
       {
         requests.length === 0 ? (<h1 className="text-xl mt-20 font-bold text-white">No requests found!</h1>) : (
-           <div className="shadow-xl bg-[#464343] rounded-xl p-2 m-20">
+           <div className="shadow-[0_0_22px_22px_rgba(0,0,0,0.3)] rounded-xl p-2 m-20">
         <h1 className="text-xl font-medium">Requests</h1>
         <hr className="mt-2 opacity-40" />
         {requests.map((request) => {
