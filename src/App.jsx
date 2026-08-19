@@ -11,6 +11,7 @@ import Error from "./components/Error";
 import ProfileCard from "./components/ProfileCard";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
+import EditPassword from "./components/EditPassword";
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
               <Route path="/error" element={<Error/>} />
               <Route path="/connections" element={<Connections/>} />
               <Route path="/requests/received" element={<Requests/>} />
+              <Route path="/edit/password" element={<EditPassword/>} />
 
             </Route>
           </Routes>

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
@@ -115,11 +115,16 @@ const Login = () => {
               />
               <p
               className="text-red-600">{errors}</p>
-              <p 
+              <div className="flex justify-between items-center gap-20">
+                <p 
               onClick={()=> setIsLoginForm(value => !value)}
               className="text-blue-400 underline cursor-pointer">
                 {isLoginForm ? "New to DevFuse? Sign up" : "Already a user? Login here"}
               </p>
+              <Link to="/edit/password"
+              className="text-blue-400 underline cursor-pointer"
+              >Forgot password?</Link>
+              </div>
             </fieldset>
             
           </div>
