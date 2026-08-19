@@ -121,9 +121,13 @@ const Login = () => {
               className="text-blue-400 underline cursor-pointer">
                 {isLoginForm ? "New to DevFuse? Sign up" : "Already a user? Login here"}
               </p>
-              <Link to="/edit/password"
+              {
+                isLoginForm && (
+                  <Link to="/edit/password"
               className="text-blue-400 underline cursor-pointer"
               >Forgot password?</Link>
+                )
+              }
               </div>
             </fieldset>
             

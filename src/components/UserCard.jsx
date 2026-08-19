@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 const UserCard = ({user}) =>{
   
-  const { _id, firstName, lastName,about,imagUrl,age,gender,skills} = user || {};
+  const { _id, firstName, lastName,about,imagUrl,age,gender,skills=[]} = user || {};
 
   const dispatch = useDispatch();
   const sendRequest = async (status,userId) =>{    

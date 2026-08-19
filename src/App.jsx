@@ -15,7 +15,7 @@ import EditPassword from "./components/EditPassword";
 import { StarsBackground } from "./components/stars";
 function App() {
   return (
-    <StarsBackground>
+    <StarsBackground pointerEvents={false}>
 
       <>
       <Provider store={appStore}>
