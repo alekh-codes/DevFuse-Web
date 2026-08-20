@@ -19,16 +19,16 @@ const Nav = () => {
       }
     }
   return (
-    <div className="flex justify-between items-center mt-2">
+    <div className="flex justify-between items-center  mt-5">
       <div className="flex items-center">
-        <img src={Logo} width="64" alt="" />
-        <Link to="/" className=" text-3xl font-medium -mt-0.5">DevFuse</Link>
+        <img src={Logo} className="w-10 md:w-13 lg:w-15" alt="" />
+        <Link to="/" className=" text-sm md:text-2xl lg:text-3xl font-medium -mt-0.5">DevFuse</Link>
       </div>
       {user && (
 
         <div className="dropdown dropdown-end mx-4 flex items-center">
         
-        <div className=" mx-4">
+        <div className="text-sm  mx-4 hidden md:block">
             Hello {firstName}!
         </div>    
         <div
@@ -37,7 +37,7 @@ const Nav = () => {
           className="btn btn-ghost btn-circle avatar flex items-center"
         >
             
-          <div className="w-10 rounded-full">
+          <div className="rounded-full">
             <img
                 src={`${BASE_URL}${imagUrl}`}
                  alt={firstName}

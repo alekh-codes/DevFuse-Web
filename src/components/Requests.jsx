@@ -37,6 +37,7 @@ const Requests = () => {
         {},
         { withCredentials: true },
       );
+      
       dispatch(removeRequest(requestId));
       if(status === "accepted"){
         setToastMessage("Request accepted!");
@@ -60,11 +61,7 @@ const Requests = () => {
     }
   };
 
-  const requestRemove = (id) =>{
-    setTimeout(() => {
-      dispatch(removeRequest(id));
-    }, 2000);
-  }
+  
 
   if (!requests) return;
 
@@ -78,6 +75,7 @@ const Requests = () => {
         <h1 className="text-xl font-medium">Requests</h1>
         <hr className="mt-2 opacity-40" />
         {requests.map((request) => {
+          if(!request.fromUserId) return null;
           const { _id, firstName, lastName, imagUrl, about } =
             request.fromUserId;
 
@@ -89,7 +87,7 @@ const Requests = () => {
               <div className="flex">
                 <div className="">
                   <img
-                    src={imagUrl}
+                    src={`${BASE_URL}${imagUrl}`}
                     className="h-20 w-20 rounded-full"
                     alt=""
                   />
@@ -105,7 +103,6 @@ const Requests = () => {
                 <button
                   onClick={() => {
                     reviewRequest("accepted", request._id)
-                    requestRemove(request._id)
                 }}
                   className="p-2 mx-2 text-2xl border-2 border-gray-500/80 hover:bg-green-400 transition-colors duration-500 ease-in-out hover:text-black cursor-pointer rounded-full"
                 >
@@ -114,7 +111,6 @@ const Requests = () => {
                 <button
                   onClick={() => {
                     reviewRequest("rejected", request._id)
-                    requestRemove(request._id)
                 }}
                   className="p-2 mx-2 text-2xl border-2 border-gray-500/80 hover:bg-red-400 transition-colors duration-500 ease-in-out hover:text-black cursor-pointer rounded-full"
                 >

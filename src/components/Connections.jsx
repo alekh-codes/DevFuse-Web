@@ -37,7 +37,7 @@ const Connections = () => {
             
             <div key={_id} className='flex m-5 border-2 shadow-md border-gray-400/20 p-2 rounded-xl'>
               <div className=''>
-                <img src={imagUrl} className='h-20 w-20 rounded-full' alt="" />
+                <img src={`${BASE_URL}${imagUrl}`} className='h-20 w-20 rounded-full' alt="" />
               </div>
               <div className='m-3'>
                 <p className='text-xl font-medium' >{lastName ? (firstName + ' ' + lastName) : firstName}</p>

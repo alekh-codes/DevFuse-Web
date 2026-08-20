@@ -57,7 +57,7 @@ const Feed = () => {
   }
 
   return (
-    <div className="text-black text-2xl flex justify-center">
+    <div className="text-black text-2xl flex justify-center mt-15">
       <UserCard user={feed[0]} />
     </div>
   );

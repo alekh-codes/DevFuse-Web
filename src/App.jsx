@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Body from "./components/Body";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
-import Feed from "./components/Feed";
-import Profile from "./components/Profile";
-import Error from "./components/Error";
-import ProfileCard from "./components/ProfileCard";
-import Connections from "./components/Connections";
-import Requests from "./components/Requests";
-import EditPassword from "./components/EditPassword";
 import { StarsBackground } from "./components/stars";
+
+const Login = lazy(() => import("./components/Login"));
+const Signup = lazy(() => import("./components/Signup"));
+const Feed = lazy(() => import("./components/Feed"));
+const ProfileCard = lazy(() => import("./components/ProfileCard"));
+const Profile = lazy(() => import("./components/Profile"));
+const Error = lazy(() => import("./components/Error"));
+const Connections = lazy(() => import("./components/Connections"));
+const Requests = lazy(() => import("./components/Requests"));
+const EditPassword = lazy(() => import("./components/EditPassword"));
 function App() {
   return (
     <StarsBackground pointerEvents={false}>
@@ -20,7 +21,13 @@ function App() {
       <>
       <Provider store={appStore}>
         <BrowserRouter basename="/">
-          <Routes>
+         <Suspense fallback={<div className="flex justify-center items-center font-medium text-3xl h-screen">
+          <div className="flex items-center justify-center gap-3">
+            <span>DevFuse</span>
+            <span className="loading loading-infinity text-4xl loading-xl"></span>
+          </div>
+         </div>}>
+           <Routes>
             <Route path="/" element={<Body />}>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
@@ -34,6 +41,7 @@ function App() {
 
             </Route>
           </Routes>
+         </Suspense>
         </BrowserRouter>
       </Provider>
     </>
