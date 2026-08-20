@@ -1,8 +1,9 @@
 import { BASE_URL } from "@/utils/constants";
 import { removeUserFromfeed } from "@/utils/feedSlice";
 import axios from "axios";
+import { RiCodeSSlashFill, RiGitPullRequestFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-
+import TinderCard from "react-tinder-card";
 const UserCard = ({user}) =>{
   
   const { _id, firstName, lastName,about,imagUrl,age,gender,skills=[]} = user || {};
@@ -12,9 +13,24 @@ const UserCard = ({user}) =>{
     
     const res = await axios.post(BASE_URL + "/request/send/" + status +  "/" + userId, {} , {withCredentials:true});
     dispatch(removeUserFromfeed(userId));
+
+
+  }
+
+  const onSwipe = (direction) =>{
+    if(direction==="left"){
+      sendRequest("ignored", _id)
+    }else if(direction === "right"){
+      sendRequest("interested",_id);
+    }
   }
     return(
-        <div className="p-6 flex mx-6 flex-col justify-center items-center w-100  rounded-xl shadow-[0_0_22px_22px_rgba(0,0,0,0.3)] text-center ">
+        <TinderCard
+      onSwipe={onSwipe}
+      preventSwipe={["up","down"]}
+      className="absolute cursor-grab active:cursor-grabbing"
+      >
+        <div className="p-6 flex mx-6 flex-col bg-zinc-900/90 justify-center items-center w-100  rounded-xl shadow-[0_0_22px_22px_rgba(0,0,0,0.3)] text-center ">
             <div className="w-22 h-22 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-[#7df9ff] shadow-[0_0_15px_rgba(125,249,255,0.3)] mb-4">
               <img
                 src={`${BASE_URL}${imagUrl}`}
@@ -51,16 +67,20 @@ const UserCard = ({user}) =>{
                 ))}
               </div>
             </div>
-            <div className="text-sm mt-7 flex gap-5 ">
+            <div className="text-sm mt-7 flex gap-4 ">
               <button 
+              title="Ignore"
               onClick={()=> sendRequest("ignored",_id)}
-              className="none lg:block cursor-pointer bg-red-500 p-2 text-white border-white border-2 rounded-xl">Ignore</button>
+              className="hidden xl:block cursor-pointer bg-red-500 p-3 text-2xl text-white border-white border-2 rounded-xl"><RiCodeSSlashFill/></button>
               <button
+              title="Interested"
               onClick={()=> sendRequest("interested", _id)}              
-              className="none lg:block cursor-pointer bg-blue-500 p-2 text-white border-white border-2 rounded-xl">Interested</button>
+              className="hidden xl:block cursor-pointer bg-blue-500 p-3 text-2xl text-white border-white border-2 rounded-xl"><RiGitPullRequestFill/></button>
 
             </div>
           </div>
+      </TinderCard>
+      
     )
 }
 export default UserCard

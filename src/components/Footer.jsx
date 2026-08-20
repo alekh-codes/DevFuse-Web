@@ -12,11 +12,7 @@ const Footer = () => {
         />
     <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
   </aside>
-  <nav className="grid-flow-col md:place-self-center md:justify-self-end">
-    <Link to="https://www.linkedin.com/in/code-alekh22/" className="text-3xl">
-      <RiLinkedinBoxFill/>
-    </Link>
-  </nav>
+  
 </footer>
   );
 };
