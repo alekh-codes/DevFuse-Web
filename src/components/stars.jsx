@@ -114,7 +114,9 @@ function StarsBackground({
           }}
           starColor={starColor} />
       </motion.div>
-      {children}
+      
+  {children}
+
     </div>
   );
 }
