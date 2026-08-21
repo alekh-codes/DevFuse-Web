@@ -58,7 +58,7 @@ const Feed = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="relative w-87.5 h-150 flex justify-center items-center">
+      <div className="relative w-87.5 h-130 flex justify-center items-center">
         {feed.map((user) => (
           <UserCard key={user._id} user={user} />
         ))}

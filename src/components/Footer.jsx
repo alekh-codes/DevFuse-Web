@@ -1,5 +1,4 @@
-import { RiLinkedinBoxFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+
 import Logo from "../assets/Logo.png"
 const Footer = () => {
   return (

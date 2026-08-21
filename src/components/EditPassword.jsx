@@ -49,8 +49,8 @@ const EditPassword = () =>{
         <div className="flex justify-center items-center my-12  ">
         {
             showToast && (
-                <div className="toast toast-top toast-center">
-                    <div className={`${errors ? "bg-red-400" : "bg-green-500"} alert alert-success`}>
+                <div className="toast toast-top toast-center mt-6">
+                    <div className={`${errors ? "bg-red-500" : "bg-green-500"} alert alert-success`}>
                     {
                     errors ? 
                     <span>{errors}</span>:

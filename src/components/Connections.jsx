@@ -26,8 +26,8 @@ const Connections = () => {
     if(!connections) return;
     if(connections.length ===0) return <h1 className='text-xl text-center mt-20 font-bold text-white'>No connections found</h1>
   return (
-    <div className='flex justify-center'>
-      <div className='shadow-[0_0_22px_22px_rgba(0,0,0,0.3)] rounded-xl px-4 py-2 m-20 bg-zinc-950/80 '>
+    <div className='flex justify-center mx-5 mt-10'>
+      <div className='shadow-[0_0_22px_22px_rgba(0,0,0,0.3)] rounded-xl p-3 bg-zinc-950/80 '>
         <h1 className='text-xl font-medium'>Connections</h1>
         <hr className='mt-2 opacity-40' />
         {
@@ -35,12 +35,12 @@ const Connections = () => {
             const {firstName, lastName,_id,about,imagUrl} = connection;
             return (
             
-            <div key={_id} className='flex m-5 border-2  shadow-md border-gray-400/20 p-2 rounded-xl'>
-              <div className=''>
-                <img src={`${BASE_URL}${imagUrl}`} className='border-2 border-white h-20 w-20 rounded-full' alt="" />
+            <div key={_id} className='flex items-center m-5 border-2  shadow-md border-gray-400/20 p-2 rounded-xl'>
+              <div className='w-20 h-20 shrink-0'>
+                <img src={`${BASE_URL}${imagUrl}`} className='border-2 border-white h-full w-full rounded-full' alt="" />
               </div>
               <div className='m-3'>
-                <p className='text-xl font-medium' >{lastName ? (firstName + ' ' + lastName) : firstName}</p>
+                <p className='text-[16px] md:text-xl font-medium' >{lastName ? (firstName + ' ' + lastName) : firstName}</p>
                 <p className='text-gray-400/60'>{about}</p>
               </div>
             </div>

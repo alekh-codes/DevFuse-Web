@@ -68,10 +68,10 @@ const Requests = () => {
 
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center mx-5 mt-10">
       {
         requests.length === 0 ? (<h1 className="text-xl mt-20 font-bold text-white">No requests found!</h1>) : (
-           <div className="shadow-[0_0_22px_22px_rgba(0,0,0,0.3)] rounded-xl p-2 m-20  ">
+           <div className="shadow-[0_0_22px_22px_rgba(0,0,0,0.3)] rounded-xl p-3">
         <h1 className="text-xl font-medium">Requests</h1>
         <hr className="mt-2 opacity-40" />
         {requests.map((request) => {
@@ -82,21 +82,21 @@ const Requests = () => {
           return (
             <div
               key={_id}
-              className="flex items-center justify-between m-5 border-2 shadow-md border-gray-400/20 p-2 rounded-xl"
+              className="flex items-center justify-between  border-2 shadow-md border-gray-400/20 rounded-xl px-3 my-3"
             >
-              <div className="flex">
-                <div className="">
+              <div className="flex items-center justify-start gap-2 p-2">
+                <div className="h-20 w-20 shrink-0">
                   <img
                     src={`${BASE_URL}${imagUrl}`}
-                    className="h-20 w-20 rounded-full"
-                    alt=""
+                    className="h-full w-full rounded-full object-cover"
+                    alt={firstName}
                   />
                 </div>
                 <div className="m-3">
-                  <p className="font-bold text-xl">
+                  <p className="font-bold text-[16px] md:text-xl">
                     {lastName ? firstName + " " + lastName : firstName}
                   </p>
-                  <p className="text-gray-300/60">{about}</p>
+                  <p className="text-gray-300/60 line-clamp-2">{about}</p>
                 </div>
               </div>
               <div className="mx-4 flex ">

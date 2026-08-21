@@ -30,7 +30,7 @@ const UserCard = ({user}) =>{
       preventSwipe={["up","down"]}
       className="absolute cursor-grab active:cursor-grabbing"
       >
-        <div className="p-6 flex mx-5 md:mx-0 flex-col bg-zinc-900 justify-center items-center h-120  rounded-xl  text-center ">
+        <div className="px-3 py-0 flex mx-5 md:mx-0 flex-col bg-zinc-900 justify-center items-center h-95 md:h-120 w-80 md:w-100  rounded-xl  text-center ">
             <div className="w-22 h-22 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-[#7df9ff] shadow-[0_0_15px_rgba(125,249,255,0.3)] mb-4">
               <img
                 src={`${BASE_URL}${imagUrl}`}
@@ -40,7 +40,7 @@ const UserCard = ({user}) =>{
               
             </div>
 
-            <h1 className="text-2xl text-white font-bold ">
+            <h1 className="text-[16px] md:text-2xl text-white font-bold ">
               {lastName ? `${firstName} ${lastName}` : firstName}
             </h1>
 
@@ -71,11 +71,11 @@ const UserCard = ({user}) =>{
               <button 
               title="Ignore"
               onClick={()=> sendRequest("ignored",_id)}
-              className="hidden xl:block cursor-pointer bg-red-500 p-3 text-2xl text-white border-white border-2 rounded-xl"><RiCodeSSlashFill/></button>
+              className="hidden xl:block cursor-pointer bg-red-500 hover:bg-red-700 p-3 transition-colors duration-400 ease-in-out text-2xl text-white border-white border-2 rounded-xl"><RiCodeSSlashFill/></button>
               <button
               title="Interested"
               onClick={()=> sendRequest("interested", _id)}              
-              className="hidden xl:block cursor-pointer bg-blue-500 p-3 text-2xl text-white border-white border-2 rounded-xl"><RiGitPullRequestFill/></button>
+              className="hidden xl:block cursor-pointer bg-blue-500 hover:bg-blue-700 transition-colors duration-400 ease-in-out p-3 text-2xl text-white border-white border-2 rounded-xl"><RiGitPullRequestFill/></button>
 
             </div>
           </div>
