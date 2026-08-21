@@ -28,13 +28,11 @@ const Profile = () => {
 
   const addSkill = () => {
    if (!skillInput.trim()) return;
-
-  setFormData((prev) => ({
+   setFormData((prev) => ({
     ...prev,
     skills: [...(prev.skills || []), skillInput.trim()],
-  }));
-
-  setSkillInput("");
+   }));
+   setSkillInput("");
   };
 
   const deleteSkill = (index) =>{
@@ -43,6 +41,7 @@ const Profile = () => {
     skills: (prev.skills || []).filter((_, i) => i !== index),
   }));
   }
+
   const fetchUser = async () => {
     if (user) return;
     try {
@@ -56,6 +55,7 @@ const Profile = () => {
       }
     }
   };
+
   useEffect(() => {
     fetchUser();
   }, []);
@@ -71,25 +71,26 @@ const Profile = () => {
       imagUrl: imagUrl || ""
     });
   }, [user]);
+
   const handleChange = (e) => {
-  const { name, value, type, files } = e.target;
+    const { name, value, type, files } = e.target;
 
-  if (type === "file") {
-    const file = files[0];
+    if (type === "file") {
+      const file = files[0];
+      if (!file) return;
 
-    if (!file) return;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: file,
-    }));
-  } else {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-};
+      setFormData((prev) => ({
+        ...prev,
+        [name]: file,
+      }));
+    }
+    else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
 
   const handleSubmit = async () => {
   setError("");
@@ -141,11 +142,11 @@ const Profile = () => {
 
   return (
     user && (
-      <div className={`flex justify-center items-center   rounded-2xl `}>
+      <div className={`flex justify-center  mt-4 rounded-2xl `}>
         <div className="card  border-black/20 shadow-[0_0_22px_22px_rgba(0,0,0,0.3)]">
           <div className="card-body">
             <h2 className="card-title  text-3xl">Edit details</h2>
-            <div className="grid grid-cols-3 place-content-between gap-2">
+            <div className="grid grid-cols-1 min-[550px]:grid-cols-2 min-[550px]:gap-2 md:grid-cols-3 place-content-between gap-0 md:gap-2">
               <fieldset className="fieldset ">
                 <label className="label" htmlFor="name">
                   Upload Prfoile Picture:
@@ -170,7 +171,7 @@ const Profile = () => {
                   className=" border-2 p-2 rounded-lg"
                 />
               </fieldset>
-              <fieldset className="fieldset my-1">
+              <fieldset className="fieldset ">
                 <label className="label" htmlFor="name">
                   Last Name:
                 </label>
@@ -182,7 +183,7 @@ const Profile = () => {
                   className="border-2 p-2 rounded-lg"
                 />
               </fieldset>
-              <fieldset className="fieldset my-1">
+              <fieldset className="fieldset ">
                 <label className="label" htmlFor="name">
                   Email:
                 </label>
@@ -194,7 +195,7 @@ const Profile = () => {
                   className="border-2 p-2 rounded-lg bg-gray-100/40 cursor-not-allowed"
                 />
               </fieldset>
-              <fieldset className="fieldset my-1">
+              <fieldset className="fieldset">
                 <label className="label" htmlFor="name">
                   Gender:
                 </label>
@@ -206,7 +207,7 @@ const Profile = () => {
                     
                   </select>
               </fieldset>
-              <fieldset className="fieldset my-1">
+              <fieldset className="fieldset ">
                 <label className="label" htmlFor="name">
                   Age:
                 </label>
@@ -218,7 +219,7 @@ const Profile = () => {
                   className=" border-2 p-2 rounded-lg"
                 />
               </fieldset>
-              <fieldset className="fieldset my-1">
+              <fieldset className="fieldset ">
                 <label className="label" htmlFor="name">
                   About:
                 </label>
@@ -230,7 +231,7 @@ const Profile = () => {
                   className=" border-2 p-2 rounded-lg"
                 />
               </fieldset>
-              <fieldset className="fieldset my-1">
+              <fieldset className="fieldset">
                 <label className="label" htmlFor="name">
                   Skills:
                 </label>

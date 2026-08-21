@@ -46,12 +46,12 @@ const Feed = () => {
           showBorder={false}
           className="custom-class"
         >
-          <h1 className="font-bold text-2xl mt-20">
+          <h1 className="font-bold text-2xl mt-20 text-sm md:text-2xl">
             All caught up! Check back later for new profiles
           </h1>
         </GradientText>
 
-        <RiCheckLine className="text-6xl mt-12 bg-green-600 p-2 rounded-full" />
+        <RiCheckLine className="text-3xl md:text-6xl mt-5 bg-green-600 p-2 rounded-full" />
       </div>
     );
   }
@@ -63,7 +63,7 @@ const Feed = () => {
           <UserCard key={user._id} user={user} />
         ))}
       </div>
-      <p className="lg:hidden text-gray-200/40 font-medium">Swipe left to ignore and right to show interest.</p>
+      <p className="xl:hidden mx-2 text-center text-gray-200/40 font-medium">Swipe left to ignore and right to show interest.</p>
     </div>
   );
 };

@@ -56,14 +56,14 @@ const Login = () => {
   },[user,navigate])
   return (
     <div className="flex justify-center items-center my-12  ">
-      <div className="card  w-96 border-black/20 border-2 shadow-[0_0_22px_22px_rgba(0,0,0,0.3)]">
+      <div className="card  w-96 border-black/20 mx-6 md:mx-0 border-2 shadow-[0_0_22px_22px_rgba(0,0,0,0.3)]">
         <div className="card-body">
           <h2 className="card-title  text-3xl">{isLoginForm ? "Login" : "Sign up"}</h2>
           <div>
             {
               !isLoginForm && (
                 <>
-                <fieldset className="fieldset my-4">
+                <fieldset className="fieldset my-1">
               <label className="label" htmlFor="name">
                 First Name
               </label>
@@ -75,7 +75,7 @@ const Login = () => {
                 className=" border-2 p-2 rounded-lg"
               />
             </fieldset>
-            <fieldset className="fieldset my-4">
+            <fieldset className="fieldset my-1">
               <label className="label" htmlFor="name">
                 Last Name
               </label>
@@ -90,7 +90,7 @@ const Login = () => {
                 </>
               )
             }
-            <fieldset className="fieldset my-4">
+            <fieldset className="fieldset my-1">
               <label className="label" htmlFor="name">
                 {isLoginForm ? "Username" : "Email"}
               </label>
@@ -102,7 +102,7 @@ const Login = () => {
                 className=" border-2 p-2 rounded-lg"
               />
             </fieldset>
-            <fieldset className="fieldset my-4">
+            <fieldset className="fieldset ">
               <label className="label" htmlFor="name">
                 Password
               </label>
@@ -116,11 +116,7 @@ const Login = () => {
               <p
               className="text-red-600">{errors}</p>
               <div className="flex justify-between items-center gap-20">
-                <p 
-              onClick={()=> setIsLoginForm(value => !value)}
-              className="text-blue-400 underline cursor-pointer">
-                {isLoginForm ? "New to DevFuse? Sign up" : "Already a user? Login here"}
-              </p>
+               
               {
                 isLoginForm && (
                   <Link to="/edit/password"
@@ -144,7 +140,18 @@ const Login = () => {
               </div>: isLoginForm ? "Login" : "Sign up"}
             </button>
           </div>
+          <div className="flex items-center my-4">
+  <div className="flex-grow border-t border-zinc-700"></div>
+  <span className="mx-4 text-xs font-semibold uppercase text-zinc-400">OR</span>
+  <div className="flex-grow border-t border-zinc-700"></div>
+</div>
+          <p 
+              onClick={()=> setIsLoginForm(value => !value)}
+              className="text-blue-400  text-center underline cursor-pointer">
+                {isLoginForm ? "New to DevFuse? Sign up" : "Already a user? Login here"}
+              </p>
         </div>
+         
       </div>
     </div>
   );

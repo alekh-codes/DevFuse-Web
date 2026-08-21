@@ -30,7 +30,7 @@ const UserCard = ({user}) =>{
       preventSwipe={["up","down"]}
       className="absolute cursor-grab active:cursor-grabbing"
       >
-        <div className="p-6 flex mx-6 flex-col bg-zinc-900 justify-center items-center w-100 h-120  rounded-xl  text-center ">
+        <div className="p-6 flex mx-5 md:mx-0 flex-col bg-zinc-900 justify-center items-center h-120  rounded-xl  text-center ">
             <div className="w-22 h-22 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-[#7df9ff] shadow-[0_0_15px_rgba(125,249,255,0.3)] mb-4">
               <img
                 src={`${BASE_URL}${imagUrl}`}
@@ -67,7 +67,7 @@ const UserCard = ({user}) =>{
                 ))}
               </div>
             </div>
-            <div className="text-sm mt-7 flex gap-4 ">
+            <div className="mt-7 flex justify-between w-full">
               <button 
               title="Ignore"
               onClick={()=> sendRequest("ignored",_id)}
