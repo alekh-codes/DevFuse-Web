@@ -13,6 +13,8 @@ const Requests = () => {
   const [toastMessage,setToastMessage] = useState("");
   const [showToast,setShowToast] = useState(false);
   const [bgColor,setBgColor] = useState("");
+  const [noRequests, setNoRequests] = useState(false);
+
   const fetchRequests = async () => {
     try {
       const res = await axios.get(BASE_URL + "/requests/received", {
@@ -61,10 +63,32 @@ const Requests = () => {
     }
   };
 
+  useEffect(()=>{
+    const timer = setTimeout(() => {
+      setNoRequests(true)
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  },[requests])
   
 
   if (!requests) return;
 
+
+  if(requests.length === 0) return <div className='text-xl text-center mt-20 font-bold text-white'>
+    
+    {
+      !noRequests ? (
+        <>
+        <span>DevFuse</span>
+    <span className="loading loading-infinity text-4xl loading-xl"></span>
+        </>
+      ):(
+<div className="mt-4">No requests found</div>
+      )
+    }
+    
+  </div>
 
 
   return (

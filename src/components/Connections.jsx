@@ -1,7 +1,7 @@
 import { addConnections } from '@/utils/connectionsSlice'
 import { BASE_URL } from '@/utils/constants'
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,6 +9,7 @@ const Connections = () => {
     const connections = useSelector(store => store.connections);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [noConnection,setNoConnection] = useState(false);
     const getConnections = async () =>{
         try{
             
@@ -23,8 +24,26 @@ const Connections = () => {
         getConnections();
     },[])
 
+    useEffect(()=>{
+      setTimeout(()=>{
+        setNoConnection(true)
+      },5000)
+    },[connections])
+    
+
     if(!connections) return;
-    if(connections.length ===0) return <h1 className='text-xl text-center mt-20 font-bold text-white'>No connections found</h1>
+    if(connections.length ===0) return <div className='text-xl text-center mt-20 font-bold text-white'>
+      {
+        !noConnection ? (
+          <>
+          <span>DevFuse</span>
+            <span className="loading loading-infinity text-4xl loading-xl"></span>
+          </>
+        ):(
+          <div className="mt-4">No connections found</div>
+        )
+      }
+    </div>
   return (
     <div className='flex justify-center mx-5 mt-10'>
       <div className='shadow-[0_0_22px_22px_rgba(0,0,0,0.3)] rounded-xl p-3 bg-zinc-950/80 '>
