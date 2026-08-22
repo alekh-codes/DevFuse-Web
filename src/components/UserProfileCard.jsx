@@ -1,5 +1,5 @@
 import {  RiEdit2Line } from "react-icons/ri";
-import ElectricBorder from "./ElectricBorder";
+import ElectricBorder from "../ui-components/ElectricBorder";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";

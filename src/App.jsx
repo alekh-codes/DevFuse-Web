@@ -3,12 +3,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Body from "./components/Body";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
-import { StarsBackground } from "./components/stars";
+import { StarsBackground } from "./ui-components/stars";
 
 const Login = lazy(() => import("./components/Login"));
 const Signup = lazy(() => import("./components/Signup"));
 const Feed = lazy(() => import("./components/Feed"));
-const ProfileCard = lazy(() => import("./components/ProfileCard"));
+const ProfileCard = lazy(() => import("./components/UserProfileCard"));
 const Profile = lazy(() => import("./components/Profile"));
 const Error = lazy(() => import("./components/Error"));
 const Connections = lazy(() => import("./components/Connections"));
